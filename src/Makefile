@@ -1,7 +1,7 @@
 CXX := g++
 LOGLIBDIR ?=../../loguru
 ARGSLIBDIR ?= ../../args
-CFLAGS := -g
+CFLAGS := -g -std=c++11 -Wall
 LFLAGS := $(CFLAGS)
 
 INCLUDES := -I$(LOGLIBDIR) -I$(ARGSLIBDIR) -I.
@@ -31,7 +31,7 @@ directory:
 	mkdir -p obj
 
 clean:
-	rm $(TARGET)
+	rm -f $(TARGET)
 	rm -rf obj
 
 -include $(OBJFILES:.o=.d)

@@ -32,3 +32,9 @@
 *.app
 
 *obj/*
+
+# Key files
+*.key.json
+
+# Compilation database
+*/compile_commands.json

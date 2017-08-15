@@ -1,0 +1,13 @@
+{
+  "Name": "Gemini-Sandbox",
+  "SandBox": true,
+  "RestAddr": "https://api.sandbox.gemini.com",
+  "WebSocketAddr": "wss://api.sandbox.gemini.com",
+  "Symbols": [
+    "btcusd",
+    "ethusd",
+    "ethbtc"
+  ],
+  "Public-Key": "trcsSgFYLa3g5JewxgqQ",
+  "Private-Key": "2fprdhaqvCS6wM4FSZNHNJ64VYHt"
+}

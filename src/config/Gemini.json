@@ -1,0 +1,12 @@
+{
+  "Name": "Gemini",
+  "SandBox": false,
+  "RestAddr": "https://api.gemini.com",
+  "WebSocketAddr": "wss://api.gemini.com",
+  "Symbols": [
+    "btcusd",
+    "ethusd",
+    "ethbtc"
+  ],
+  "INCLUDE": "Gemini.key.json"
+}
