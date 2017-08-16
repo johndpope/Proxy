@@ -1,6 +1,5 @@
 #pragma once
 
-#include <fstream>
 #include <string>
 #include <vector>
 
@@ -12,7 +11,7 @@ namespace proxy
 class Config
 {
 public:
-    Config();
+
     Config(const std::string& fileName);
 
     template<typename T>
@@ -22,6 +21,7 @@ public:
 
 private:
     web::json::value json_;
+    web::json::value include_;
 };
 
 } // end namespace proxy
