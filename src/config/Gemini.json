@@ -8,5 +8,5 @@
     "ethusd",
     "ethbtc"
   ],
-  "INCLUDE": "Gemini.key.json"
+  "include": "Gemini.key.json"
 }
