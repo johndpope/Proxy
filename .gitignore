@@ -38,3 +38,6 @@
 
 # Compilation database
 */compile_commands.json
+
+# Executable
+*Proxy
