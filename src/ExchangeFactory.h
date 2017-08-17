@@ -10,7 +10,7 @@ namespace proxy
 class ProxyBase
 {
 public:
-    ProxyBase(const Config* );
+    ProxyBase(const Config* config) : config_(config) {}
 
     /**
      * Make connection to the exchange
