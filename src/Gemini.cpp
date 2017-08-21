@@ -6,4 +6,25 @@ using namespace proxy;
 
 Gemini::Gemini(const Config* config) : ProxyBase(config)
 {
+
+}
+
+bool Gemini::connectExch()
+{
+
+}
+
+bool Gemini::connectEngine()
+{
+
+}
+
+bool Gemini::checkExchConnection()
+{
+
+}
+
+bool Gemini::checkEngineConnection()
+{
+
 }

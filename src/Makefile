@@ -1,7 +1,7 @@
 CXX := g++
 LOGLIBDIR ?=../../loguru
 ARGSLIBDIR ?= ../../args
-CFLAGS := -g -std=c++14 -Wall
+CFLAGS := -g -std=c++14 -Wall -Wextra
 LFLAGS := $(CFLAGS)
 
 INCLUDES := -I$(LOGLIBDIR) -I$(ARGSLIBDIR) -I.
