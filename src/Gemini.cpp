@@ -16,15 +16,12 @@ Gemini::Gemini(Config* config, args::ArgumentParser& /*argParser*/)
       exchangeConnected_(false),
       engineConnected_(false)
 {
-    // TODO: Log exchange name here
-    // And provide warning as well if
-    // connecting to real exchange
 }
 
 bool Gemini::connectExch()
 {
     std::string wsAddr = config_->get<std::string>("WebSocketAddr");
-    wsAddr += "/v1/marketdata/BTCUSD"; // TODO: use commandline to specify
+//    wsAddr += "/v1/marketdata/BTCUSD"; // TODO: use commandline to specify
     LOG_F(INFO, wsAddr.c_str());
     client_.connect(wsAddr).then([&](){
         {

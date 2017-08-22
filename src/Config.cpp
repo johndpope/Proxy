@@ -27,9 +27,10 @@ void Config::checkLoad_()
     if (fileName_)
         fileName = args::get(fileName_);
     else
-        LOG_F(ERROR, "Config file cmd arg not available");
-
-    LOG_F(WARNING, fileName.c_str());
+    {
+        LOG_F(ERROR, "Config file path not specified");
+        exit(1);
+    }
 
     std::fstream fstrm(fileName);
     json_ = json::value::parse(fstrm);
