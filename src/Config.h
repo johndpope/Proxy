@@ -4,6 +4,7 @@
 #include <vector>
 
 #include <cpprest/json.h>
+#include <args.hxx>
 
 namespace proxy
 {
@@ -12,16 +13,20 @@ class Config
 {
 public:
 
-    Config(const std::string& fileName);
+    Config(args::ArgumentParser& argParser);
 
     template<typename T>
-    T get(const std::string& key) const;
+    T get(const std::string& key);
 
-    bool hasKey(const std::string& key) const;
+    bool hasKey(const std::string& key);
 
 private:
     web::json::value json_;
     web::json::value include_;
+    args::ValueFlag<std::string> fileName_;
+    bool loaded_;
+
+    void checkLoad_();
 };
 
 } // end namespace proxy

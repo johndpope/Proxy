@@ -5,7 +5,7 @@ CFLAGS := -g -std=c++14 -Wall -Wextra
 LFLAGS := $(CFLAGS)
 
 INCLUDES := -I$(LOGLIBDIR) -I$(ARGSLIBDIR) -I.
-LIBRARIES := -lcpprest
+LIBRARIES := -lcpprest -lpthread -ldl
 
 CFLAGS += $(INCLUDES)
 LFLAGS += $(INCLUDES) $(LIBRARIES)

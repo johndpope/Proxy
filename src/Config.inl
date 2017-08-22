@@ -6,8 +6,9 @@ namespace proxy
 {
 
 template<>
-inline std::string Config::get<std::string>(const std::string& key) const
+inline std::string Config::get<std::string>(const std::string& key)
 {
+    checkLoad_();
     if (json_.has_field(key))
     {
         return json_.at(key).as_string();
@@ -16,8 +17,9 @@ inline std::string Config::get<std::string>(const std::string& key) const
 }
 
 template<>
-inline int Config::get<int>(const std::string& key) const
+inline int Config::get<int>(const std::string& key)
 {
+    checkLoad_();
     if (json_.has_field(key))
     {
         return json_.at(key).as_integer();
@@ -26,8 +28,9 @@ inline int Config::get<int>(const std::string& key) const
 }
 
 template<>
-inline double Config::get<double>(const std::string& key) const
+inline double Config::get<double>(const std::string& key)
 {
+    checkLoad_();
     if (json_.has_field(key))
     {
         return json_.at(key).as_double();
@@ -36,8 +39,9 @@ inline double Config::get<double>(const std::string& key) const
 }
 
 template<>
-inline bool Config::get<bool>(const std::string& key) const
+inline bool Config::get<bool>(const std::string& key)
 {
+    checkLoad_();
     if (json_.has_field(key))
     {
         return json_.at(key).as_bool();
@@ -47,8 +51,9 @@ inline bool Config::get<bool>(const std::string& key) const
 
 template<>
 inline std::vector<std::string>
-Config::get<std::vector<std::string> >(const std::string& key) const
+Config::get<std::vector<std::string> >(const std::string& key)
 {
+    checkLoad_();
     const web::json::array* array; // since there is no default constructor
     if (json_.has_field(key))
     {
@@ -69,8 +74,9 @@ Config::get<std::vector<std::string> >(const std::string& key) const
 
 template<>
 inline std::vector<int>
-Config::get<std::vector<int> >(const std::string& key) const
+Config::get<std::vector<int> >(const std::string& key)
 {
+    checkLoad_();
     const web::json::array* array;
     if (json_.has_field(key))
     {

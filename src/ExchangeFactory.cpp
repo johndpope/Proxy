@@ -4,7 +4,7 @@
 
 using namespace proxy;
 
-ProxyBase* createProxy(const std::string& exchName, const Config* )
+ProxyBase* createProxy(const std::string& exchName, Config* )
 {
     if (exchName == "Gemini" || exchName == "Gemini-Sandbox")
     {

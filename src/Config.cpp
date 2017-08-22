@@ -1,11 +1,36 @@
 #include <Config.h>
 #include <fstream>
+#include <loguru.hpp>
 
 using namespace proxy;
 using namespace web;
 
-Config::Config(const std::string& fileName)
+Config::Config(args::ArgumentParser& argParser)
+    : fileName_(argParser, "filepath", "config file path", {'f', "filepath"}),
+      loaded_(false)
 {
+}
+
+bool Config::hasKey(const std::string& key)
+{
+    checkLoad_();
+    return json_.has_field(key) || include_.has_field(key);
+}
+
+//FIXME: Might slowdown get functions
+void Config::checkLoad_()
+{
+    if (loaded_)
+        return;
+
+    std::string fileName;
+    if (fileName_)
+        fileName = args::get(fileName_);
+    else
+        LOG_F(ERROR, "Config file cmd arg not available");
+
+    LOG_F(WARNING, fileName.c_str());
+
     std::fstream fstrm(fileName);
     json_ = json::value::parse(fstrm);
 
@@ -27,9 +52,5 @@ Config::Config(const std::string& fileName)
         include_ = json::value::parse(incFstrm);
         json_.erase("include");
     }
-}
-
-bool Config::hasKey(const std::string& key) const
-{
-    return json_.has_field(key) || include_.has_field(key);
+    loaded_ = true;
 }

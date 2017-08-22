@@ -4,6 +4,7 @@
 
 #include <ExchangeFactory.h>
 #include <cpprest/ws_client.h>
+#include <args.hxx>
 
 namespace proxy
 {
@@ -11,7 +12,7 @@ namespace proxy
 class Gemini : public ProxyBase
 {
 public:
-    Gemini(const Config* config);
+    Gemini(Config*, args::ArgumentParser& argParser);
 
     bool connectExch() override;
 

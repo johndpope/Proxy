@@ -10,7 +10,7 @@ namespace proxy
 class ProxyBase
 {
 public:
-    ProxyBase(const Config* config) : config_(config) {}
+    ProxyBase(Config* config) : config_(config) {}
 
     /**
      * Make connection to the exchange
@@ -37,9 +37,9 @@ public:
     virtual bool checkEngineConnection() = 0;
 
 protected:
-    const Config* config_;
+    Config* config_;
 };
 
-ProxyBase* createProxy(const std::string& exchName , const Config* );
+ProxyBase* createProxy(const std::string& exchName , Config* );
 
 } // end namespace proxy
