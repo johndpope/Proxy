@@ -15,9 +15,9 @@ public:
     Config(const std::string& fileName);
 
     template<typename T>
-    T get(const std::string& key);
+    T get(const std::string& key) const;
 
-    bool hasKey(const std::string& key);
+    bool hasKey(const std::string& key) const;
 
 private:
     web::json::value json_;

@@ -29,7 +29,7 @@ Config::Config(const std::string& fileName)
     }
 }
 
-bool Config::hasKey(const std::string& key)
+bool Config::hasKey(const std::string& key) const
 {
     return json_.has_field(key) || include_.has_field(key);
 }
