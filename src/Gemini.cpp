@@ -46,7 +46,11 @@ void Gemini::connectEngine()
 bool Gemini::checkExchConnection()
 {
     std::lock_guard<std::mutex> lock(mtx_);
-    bool exchStatus = exchangeConnected_;
+    bool exchStatus = true;
+    for (auto kv : clients_)
+    {
+        exchStatus &= kv.second.exchangeConnected_;
+    }
     return exchStatus;
 }
 

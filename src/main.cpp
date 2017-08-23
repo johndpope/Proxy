@@ -38,10 +38,6 @@ int main(int argc, char** argv)
         return 1;
     }
     gemini.connectExch();
-    while (!gemini.checkExchConnection())
-    {
-        sleep(10);
-    }
     while (gemini.checkExchConnection())
     {
         sleep(10);
