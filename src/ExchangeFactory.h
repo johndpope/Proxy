@@ -14,17 +14,15 @@ public:
 
     /**
      * Make connection to the exchange
-     * Returns true if success; false otherwise.
      * Should be non-blocking
      */
-    virtual bool connectExch() = 0;
+    virtual void connectExch() = 0;
 
     /**
      * Make connection to the engine
-     * Returns true if success, false otherwise.
      * Should be non-blocking
      */
-    virtual bool connectEngine() = 0;
+    virtual void connectEngine() = 0;
 
     /**
      * Checks connection with exchange.
