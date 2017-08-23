@@ -3,7 +3,7 @@
 #include <mutex>
 #include <unordered_map>
 
-#include <ExchangeFactory.h>
+#include <ProxyFactory.h>
 #include <cpprest/ws_client.h>
 #include <args.hxx>
 

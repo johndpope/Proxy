@@ -38,6 +38,8 @@ protected:
     Config* config_;
 };
 
-ProxyBase* createProxy(const std::string& exchName , Config* );
+ProxyBase* createProxy(const std::string& exchName,
+                       Config*,
+                       args::ArgumentParser&);
 
 } // end namespace proxy

@@ -56,7 +56,7 @@ bool Gemini::checkExchConnection()
 
 bool Gemini::checkEngineConnection()
 {
-    return false;
+    return true;
 }
 
 void Gemini::onMessage_(web::websockets::client::websocket_incoming_message /*msg*/,

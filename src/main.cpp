@@ -3,6 +3,7 @@
 #include <Gemini.h>
 #include <loguru.hpp>
 #include <args.hxx>
+#include <ProxyFactory.h>
 
 #include <iostream>
 #include <string>
@@ -10,12 +11,8 @@
 
 using namespace proxy;
 
-int main(int argc, char** argv)
+void parseHelper(args::ArgumentParser& parser, int argc, char** argv)
 {
-    loguru::init(argc, argv);
-    args::ArgumentParser parser(argv[0]);
-    Config config(parser);
-    Gemini gemini(&config, parser);
     try
     {
         parser.ParseCLI(argc, argv);
@@ -23,22 +20,40 @@ int main(int argc, char** argv)
     catch (args::Help)
     {
         std::cout << parser;
-        return 0;
+        exit(0);
     }
     catch (args::ParseError e)
     {
         std::cerr << e.what() << std::endl;
         std::cerr << parser;
-        return 1;
+        exit(1);
     }
     catch (args::ValidationError e)
     {
         std::cerr << e.what() << std::endl;
         std::cerr << parser;
-        return 1;
+        exit(1);
     }
-    gemini.connectExch();
-    while (gemini.checkExchConnection())
+}
+
+int main(int argc, char** argv)
+{
+    loguru::init(argc, argv);
+    args::ArgumentParser parser(argv[0]);
+    Config config(parser);
+
+    parseHelper(parser, argc, argv); // first time only for config loader
+
+    std::string name = config.get<std::string>("Name");
+
+    ProxyBase* proxy = createProxy(name, &config, parser);
+    //ProxyBase* proxy = new Gemini(&config, parser);
+
+    proxy->connectEngine();
+    proxy->connectExch();
+
+    while (proxy->checkExchConnection() &&
+           proxy->checkEngineConnection())
     {
         sleep(10);
     }
