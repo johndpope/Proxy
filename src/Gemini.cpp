@@ -25,6 +25,18 @@ void Gemini::connectExch()
     {
         connectHelper_(sym);
     }
+
+    // Note: make sure set message handler after everyone has connected
+
+    using namespace std::placeholders;
+
+    for (auto& sym : config_->get<std::vector<std::string> >("Symbols"))
+    {
+        clients_[sym].client_.set_message_handler(std::bind(&Gemini::onMessage_,
+                                                           this,
+                                                           _1,
+                                                           sym));
+    }
 }
 
 void Gemini::connectEngine()
@@ -47,7 +59,7 @@ void Gemini::onMessage_(web::websockets::client::websocket_incoming_message /*ms
                         const std::string& symbol)
 {
     // FIXME: write some real things
-    LOG_F(INFO, "Got %s", symbol.c_str());
+    LOG_F(2, "Got %s", symbol.c_str());
 }
 
 void Gemini::connectHelper_(const std::string& symbol)
@@ -55,17 +67,7 @@ void Gemini::connectHelper_(const std::string& symbol)
     status& clientStatus = clients_[symbol];
     std::string wsAddr = config_->get<std::string>("WebSocketAddr");
     wsAddr += "/v1/marketdata/" + symbol;
-    LOG_F(INFO, wsAddr.c_str());
-    clientStatus.clients_.connect(wsAddr).then([&](){
-        {
-            std::lock_guard<std::mutex> lock(mtx_);
-            clientStatus.exchangeConnected_ = true;
-        }
-        LOG_F(INFO, "MD connection established to %s", wsAddr.c_str());
-    });
-    using namespace std::placeholders;
-    clientStatus.clients_.set_message_handler(std::bind(&Gemini::onMessage_,
-                                                        this,
-                                                        _1,
-                                                        symbol));
+    clientStatus.client_.connect(wsAddr).wait();
+    clientStatus.exchangeConnected_ = true;
+    LOG_F(INFO, "MD connection established to %s", wsAddr.c_str());
 }

@@ -13,7 +13,7 @@ namespace proxy
 struct status
 {
 public:
-    web::websockets::client::websocket_callback_client clients_;
+    web::websockets::client::websocket_callback_client client_;
     bool exchangeConnected_;
 
     status() : exchangeConnected_(false) {}
