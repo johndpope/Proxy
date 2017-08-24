@@ -5,9 +5,6 @@
 #include <functional>
 #include <vector>
 
-// FIXME: remove this
-#include <iostream>
-
 using namespace proxy;
 using namespace web;
 using namespace web::websockets::client;
@@ -59,11 +56,27 @@ bool Gemini::checkEngineConnection()
     return true;
 }
 
-void Gemini::onMessage_(web::websockets::client::websocket_incoming_message /*msg*/,
+void Gemini::onMessage_(web::websockets::client::websocket_incoming_message msg,
                         const std::string& symbol)
 {
-    // FIXME: write some real things
-    LOG_F(2, "Got %s", symbol.c_str());
+    msg.extract_string().then([&](std::string body){
+        json::value parsed = json::value::parse(body);
+        if (parsed["type"].as_string() == "update")
+        {
+            json::array& events = parsed["events"].as_array();
+            for (auto& event : events)
+            {
+                if(event["type"].as_string() == "change")
+                {
+                    LOG_F(1, "%-8s: price: %-10s, remaining: %-12s, side: %-12s",
+                             symbol.c_str(),
+                             event["price"].as_string().c_str(),
+                             event["remaining"].as_string().c_str(),
+                             event["side"].as_string().c_str());
+                }
+            }
+        }
+    });
 }
 
 void Gemini::connectHelper_(const std::string& symbol)
