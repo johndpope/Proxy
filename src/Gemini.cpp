@@ -68,7 +68,7 @@ void Gemini::onMessage_(web::websockets::client::websocket_incoming_message msg,
             {
                 if(event["type"].as_string() == "change")
                 {
-                    LOG_F(1, "%-8s: price: %-10s, remaining: %-12s, side: %-12s",
+                    LOG_F(1, "%-8s: price: %-10sremaining: %-12sside: %-12s",
                              symbol.c_str(),
                              event["price"].as_string().c_str(),
                              event["remaining"].as_string().c_str(),
