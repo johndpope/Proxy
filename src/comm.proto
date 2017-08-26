@@ -1,0 +1,23 @@
+syntax = "proto2";
+
+package comm;
+
+enum PhoneType {
+    LEVEL = 0;
+    ORDER = 1;
+}
+
+message Update {
+    optional PhoneType updateType = 1;
+    optional int32 proxySessionId = 2;   // Used to map to symbol and exchange
+
+    message LevelUpdate {
+        optional int32 side = 1;         // 0 for bid, 1 for offer
+        optional int32 price = 2;        // scaled by 10^3
+        optional uint64 amount = 3;      // amount left for that price. scaled by 10^8
+    }
+
+    repeated LevelUpdate levelUps = 3;
+
+    // TODO: add order update later
+}
