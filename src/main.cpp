@@ -47,7 +47,6 @@ int main(int argc, char** argv)
     std::string name = config.get<std::string>("Name");
 
     ProxyBase* proxy = createProxy(name, &config, parser);
-    //ProxyBase* proxy = new Gemini(&config, parser);
 
     proxy->connectEngine();
     proxy->connectExch();

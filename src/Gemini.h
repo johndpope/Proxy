@@ -15,8 +15,9 @@ struct status
 public:
     web::websockets::client::websocket_callback_client client_;
     bool exchangeConnected_;
+    uint32_t sessionID_;
 
-    status() : exchangeConnected_(false) {}
+    status() : exchangeConnected_(false), sessionID_(0){}
 };
 
 class Gemini : public ProxyBase
