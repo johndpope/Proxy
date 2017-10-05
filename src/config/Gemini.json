@@ -4,9 +4,9 @@
   "RestAddr": "https://api.gemini.com",
   "WebSocketAddr": "wss://api.gemini.com",
   "Symbols": [
-    "btcusd",
-    "ethusd",
-    "ethbtc"
+    "BTCUSD",
+    "ETHUSD",
+    "ETHBTC"
   ],
   "include": "Gemini.key.json"
 }
